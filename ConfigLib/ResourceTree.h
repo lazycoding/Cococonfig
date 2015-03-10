@@ -21,6 +21,9 @@ public:
 
 	//create
 
+	//
+	ResourceNode* Root() const;
+
 private:
 	ResourceNode* root_;
 	void DestroyTree(ResourceNode* treenode);

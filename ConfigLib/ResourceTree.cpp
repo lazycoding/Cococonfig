@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ResourceTree.h"
 #include "ResourceNode.h"
+#include "TraversalTree.h"
 using std::shared_ptr;
 using std::make_shared;
 using std::make_unique;
@@ -34,16 +35,14 @@ ResourceNode* ResourceTree::Insert(ResourceNode* _where, const ResourceNode& nod
 
 void ResourceTree::DestroyTree(ResourceNode* treenode)
 {
-	if (!treenode)
-	{
-		return;
-	}
+	TraversalTree::Postorder(treenode, [](ResourceNode* node){
+		delete node;
+		node = nullptr;
+	});	
+}
 
-	for (auto child : treenode->children_)
-	{
-		DestroyTree(child);
-	}
 
-	delete treenode;
-	treenode = nullptr;
+ResourceNode* ResourceTree::Root() const
+{
+	return root_;
 }

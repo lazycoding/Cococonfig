@@ -9,6 +9,7 @@ typedef int LineNo;
 class ResourceNode
 {
 	friend class ResourceTree;
+	friend class TraversalTree;
 public:
 	ResourceNode();
 
