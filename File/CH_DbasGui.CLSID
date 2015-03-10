@@ -1,0 +1,441 @@
+//=======================================界面配置总体说明=============================================================
+//目前使用的程序模块有： 播出、素材管理、新上载
+//Columns  标识界面的某个列表有那些列，一般列名都和数据库中的字段名一样
+//title   界面中列的显示名
+//ColPos  界面中列的显示位置，如果为-1或者大于100，则不显示此列
+//width   列宽
+//Show   是否显示，目前没有使用
+//CanBeHide  是否可以隐藏，在列选择中使用
+//Textcolor  字的前景色
+//Textbkcolor  字的背景色
+//Bkcolor  列表的背景色
+//Bkcolorhightlight 选中的背景色
+//====================================================================================================================
+
+
+
+//-----------------------------播出切换台入口显示----------------------
+[MscView]
+VideoSource      = {"HD_M"," ","VTR1","","BUMP","ZB1"}
+
+-------------------------------------素材库列表(素材管理和播出的查询显示)---------------------------------
+[Cliplist]
+Columns                  = { "nIndex","strClipID","strClipLogicID","strClipName","nReady","strLocation","strChnID","strLSOM","strLDuration","nClipType","tPlanAirTime","nCheck","strTapeID","nTapeType","strTapeSOM",}
+
+Nindex                   = {title="序号" ColPos="0" width="67" Show="1" CanBeHide="0"}
+Strclipid                = {title="物理ID" ColPos="1" Width="122" Show="1" CanBeHide="0"}
+Strcliplogicid           = {title="逻辑ID" ColPos="13" Width="200" Show="1" CanBeHide="0"}
+Strclipname              = {title="名称" ColPos="3" Width="200" Show="1" CanBeHide="0"}
+Nready                   = {title="就绪" ColPos="4" Width="120" Show="1" CanBeHide="0"}
+Ncliptype                = {title="类型" ColPos="5" Width="97" Show="1" CanBeHide="0"}
+Strlocation              = {title="位置" ColPos="6" Width="192" Show="1" CanBeHide="0"}
+Strchnid                 = {title="频道" ColPos="7" Width="137" Show="1" CanBeHide="0"}
+Strlduration             = {title="长度" ColPos="2" Width="146" Show="1" CanBeHide="0"}
+Tplanairtime             = {title="播出时间" ColPos="8" Width="200" Show="1" CanBeHide="0"}
+Ncheck                   = {title="是否审核" ColPos="9" Width="181" show="1" CanBeHide="1"}
+Strlsom                  = {title="起点" ColPos="10" Width="122" Show="1" CanBeHide="0"}
+Strtapeid                = {title="磁带条码" ColPos="11" Width="98" Show="1" CanBeHide="0"}
+Ntapetype                = {title="磁带类型" ColPos="12" Width="96" Show="1" CanBeHide="0"}
+Strtapesom               = {title="磁带入点" ColPos="14" Width="111" Show="1" CanBeHide="0"}
+
+Col_sortbynum            = {"0"}                                //本字段标志何列的排序是按照数字排序的。
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+RowHeight                = "30"
+FontSize                 = "110"
+FontName                 = "宋体"
+
+//-------------------------------------播出节目单的列表--------------------------------------------------------------------
+
+[Playlist]
+Columns                          = {"nIndex","nPGMSchStartTime","nPGMPlayState","nPGMPlayStyle","strPGMName","strPGMDuration","strVideoSrcDevName","nPGMPlayTitle","nPGMPlayLogo","nPGMPlayTransType","strRedundantVideoSrcDevName","strExtPar"}
+nIndex                           = {title="序号" ColPos="0" width="87" Show="1" CanBeHide="0"}
+nPGMSchStartTime                 = {title="播出时间" ColPos="1" Width="130" Show="1" CanBeHide="1"}
+nPGMPlayState                    = {title="播出状态" ColPos="6" Width="106" Show="1" CanBeHide="0"}
+nPGMPlayStyle                    = {title="节目类型" ColPos="2" Width="100" Show="1" CanBeHide="0"}
+strPGMName                       = {title="节目名称" ColPos="3" Width="316" Show="1" CanBeHide="0"}
+strPGMDuration                   = {title="节目长度" ColPos="5" Width="152" Show="1" CanBeHide="0"}
+strVideoSrcDevName               = {title="视频源" ColPos="4" Width="100" Show="1" CanBeHide="0"}
+strRedundantVideoSrcDevName      = {title="应急视频源" ColPos="-1" Width="200" Show="0" CanBeHide="1"}
+nPGMPlayTitle                    = {title="字幕" ColPos="-1" Width="200" Show="0" CanBeHide="1"}
+nPGMPlayLogo                     = {title="台标" ColPos="-1" Width="200" Show="0" CanBeHide="1"}
+nPGMPlayTransType                = {title="切换类型" ColPos="-1" Width="200" Show="0" CanBeHide="1"}
+strExtPar                        = {title="键控" ColPos="7" Width="146" Show="1" CanBeHide="1"}
+Textcolor                        = {0,0,0}
+Textbkcolor                      = {125,144,158}
+Bkcolor                          = {124,144,158}
+Textcolorhightlight              = {0,0,0}
+Textbkcolorhightlight            = {148,182,246}
+Bkcolorhightlight                = {148,182,246}
+Textcolor_aired                  = {90,90,90}
+Textcolor_airing                 = {0,0,0}
+Textcolor_pst                    = {0,0,0}
+Textcolor_skipped                = {90,90,90}
+Rowheight                        = "30"
+Fontsize                         = "110"
+Fontname                         = "宋体"
+Bkcolor_airing                   = {238,134,63}
+Bkcolor_aired                    = {100,115,163}
+Bkcolor_cueing                   = {146,113,253}
+Bkcolor_failed                   = {79, 69, 112}
+Bkcolor_waitforair               = {120,120,200}
+Bkcolor_skippen                  = {135,113,37}
+Bkcolor_pst                      = {120,120,200}
+Bkcolor_Trigger                  = {250,120,200}
+strExtPar                        = {ColPos="9" Show="1" width="100"}
+
+BKColor_Skipped                  = {"161","167","196"}
+BKcolor_invaliddate              = {"161","167","196"}
+TextColor_Trigger                = {"0","0","0"}
+TextColor_Failed                 = {"0","0","0"}
+
+//-----------------------------------播出节目单的素材列表-----------------------------------------------------------
+
+
+[Contentlist]
+Columns                  = {"nIndex","strPGMState","strClipID","strClipName","strDuration","strSOM","strEOM","strRedundantID" ,"strTapeSOM",}
+
+Nindex                   = {title="序号" ColPos="0" Width="52" Show="1" CanBeHide="1"}
+Strpgmstate              = {title="播出状态" ColPos="3" Width="200" Show="1" CanBeHide="1"}
+Strclipid                = {title="物理ID" ColPos="4" Width="103" Show="1" CanBeHide="1"}
+Strclipname              = {title="素材名称" ColPos="1" Width="200" Show="1" CanBeHide="1"}
+Strduration              = {title="素材长度" ColPos="2" Width="130" Show="1" CanBeHide="1"}
+Strsom                   = {title="入点" ColPos="5" Width="130" Show="1" CanBeHide="1"}
+Streom                   = {title="出点" ColPos="6" Width="175" Show="1" CanBeHide="1"}
+Strredundantid           = {title="备播ID" ColPos="-1" Width="200" Show="0" CanBeHide="1"}
+Strtapesom               = {title="磁带入点" ColPos="7" Width="200" Show="1" CanBeHide="1"}
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+Rowheight                = "30"
+Fontsize                 = "110"
+Fontname                 = "宋体"
+Textcolor_aired          = {90,90,90}
+Textcolor_airing         = {0,0,0}
+Textcolor_pst            = {0,0,0}
+Textcolor_skipped        = {90,90,90}
+Bkcolor_airing           = {238,134,63}
+Bkcolor_aired            = {100,115,163}
+Bkcolor_cueing           = {146,113,253}
+Bkcolor_failed           = {79, 69, 112}
+Bkcolor_waitforair       = {120,120,200}
+Bkcolor_skippen          = {135,113,37}
+Bkcolor_pst              = {120,120,200}
+
+
+//-------------------------------------播出节目单的列表(北京台双屏幕)--------------------------------------------------------------------
+[PlaylistSpl]
+DoubleScreenGoX          = "1019"
+DoubleScreenGoY          = "7"
+DoubleScreenWidth        = "1024"
+DoubleScreenHeight       = "770"
+DialogBigFontSize        = "500"
+DialogSmallFontSize      = "300"
+DialogFontName           = "幼圆"
+
+Textcolor                = {255,255,255}
+Textcolor_airing         = {255,0,10}                           // 在播节目的文字颜色
+Textcolor_Trigger        = {15,120,240}
+
+//------------------------------------------播出的报警列表-----------------------------------------
+
+
+[Msglist]
+Columns                  = {"nIndex","errorSource","strDescribe","bIgnore","nLevel","tWarnTime"}
+
+Nindex                   = {title="序号" ColPos="0" width="55" Show="1" CanBeHide="0"}
+Errorsource              = {title="错误源" ColPos="-1" width="200" Show="0" CanBeHide="1"}
+Strdescribe              = {title="错误描述" ColPos="1" width="600" Show="1" CanBeHide="0"}
+Bignore                  = {title="是否忽略" ColPos="3" width="90" Show="1" CanBeHide="0"}
+Nlevel                   = {title="报警级别" ColPos="2" width="115" Show="1" CanBeHide="0"}
+Twarntime                = {title="报警时间" ColPos="4" width="200" show="1" CanBeHide="0"}
+
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+Fontname                 = ""
+Rowheight                = "30"
+Fontsize                 = "110"
+Col_SortByNum            = ""
+
+------------------------------------------素材更新列表-----------------------------------------
+[NotifyMsglist]
+Columns                  = {"nIndex","strEvent","strClipName","strClipLogicID","strLSom","strLEom","strUpdateTimes","strStatus"}
+nIndex                   = {title="序号" ColPos="0" width="53" Show="1" CanBeHide="0"}
+strEvent                 = {title="事件" ColPos="1" width="166" Show="1" CanBeHide="0"}
+strClipName              = {title="素材名称" ColPos="2" width="127" Show="1" CanBeHide="0"}
+strClipLogicID           = {title="逻辑ID" ColPos="3" width="246" Show="1" CanBeHide="0"}
+strLSom                  = {title="逻辑入点" ColPos="4" width="154" Show="1" CanBeHide="0"}
+strLEom                  = {title="逻辑出点" ColPos="5" width="101" Show="1" CanBeHide="1"}
+strUpdateTimes           = {title="素材更新次数" ColPos="6" width="101" Show="1" CanBeHide="1"}
+strStatus                = {title="状态" ColPos="7" width="101" Show="1" CanBeHide="1"}
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+Fontname                 = "宋体"
+Rowheight                = "30"
+Fontsize                 = "110"
+Col_SortByNum            = ""
+
+------------------------------------------播出-节目单浏览消息列表-----------------------------------------
+[BrdEditlist]
+Columns                  = {"nIndex","strMsgTime","strMsgContent"}
+nIndex                   = {title="序号" ColPos="0" width="53" Show="1" CanBeHide="0"}
+strMsgTime               = {title="消息时间" ColPos="1" width="100" Show="1" CanBeHide="0"}
+strMsgContent            = {title="消息内容" ColPos="2" width="200" Show="1" CanBeHide="0"}
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+Fontname                 = "宋体"
+Rowheight                = "30"
+Fontsize                 = "110"
+Col_SortByNum            = ""
+
+------------------------------------------与导播节目单交互窗口-----------------------------------------
+[FetchNetBidListView]
+Columns                  = {"strEvent","strTimeCur","strMsgContent","nStatus"}
+strEvent                 = {title="序号" ColPos="0" width="53" Show="1" CanBeHide="0"}
+strTimeCur               = {title="时间" ColPos="1" width="300" Show="1" CanBeHide="0"}
+strMsgContent            = {title="消息内容" ColPos="2" width="500" Show="1" CanBeHide="0"}
+nStatus                  = {title="状态" ColPos="3" width="258" Show="1" CanBeHide="0"}
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+Fontname                 = "宋体"
+Rowheight                = "30"
+Fontsize                 = "110"
+Col_SortByNum            = ""
+
+
+------------------------------------------抓取网络素材列表对话框-----------------------------------------
+[CheckNetBidListDlg]
+Columns                  = {"nIndex","nPGMSchStartTime","strPGMName","strPGMDuration","strVideoSrcDevName"}
+nIndex                   = {title="序号" ColPos="0" width="67" Show="1" CanBeHide="0"}
+nPGMSchStartTime         = {title="播出时间" ColPos="1" Width="130" Show="1" CanBeHide="1"}
+strPGMName               = {title="节目名称" ColPos="2" Width="175" Show="1" CanBeHide="0"}
+strPGMDuration           = {title="节目长度" ColPos="3" Width="152" Show="1" CanBeHide="0"}
+strVideoSrcDevName       = {title="视频源" ColPos="4" Width="100" Show="1" CanBeHide="0"}
+
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+Fontname                 = "宋体"
+Rowheight                = "30"
+Fontsize                 = "110"
+Col_SortByNum            = ""
+
+DialogHeight             = "500"
+DialogWidth              = "800"
+MxtListHeight            = "400"
+MxtListWidth             = "800"
+
+------------------------------------------素材一致性检查列表-----------------------------------------
+
+[Clipconsistlist]
+
+Columns                  = { "nIndex","strClipID",}
+
+Nindex                   = {title="序号" ColPos="0" Width="85" Show="1"}
+Strclipid                = {title="素材ID" ColPos="1" Width="98" Show="1"}
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+Col_SortByNum            = ""
+RowHeight                = "30"
+FontSize                 = "110"
+FontName                 = "宋体"
+------------------------------------------素材拷贝状态列表-----------------------------------------
+
+[Copyproclist]
+Columns                  = {"nIndex","CLIPID","CopySource","CopyDest","status","clipName"}
+
+Nindex                   = {title="序号" ColPos="0" width="54" Show="1" CanBeHide="0"}
+Clipid                   = {title="素材ID" ColPos="1" width="98" Show="1" CanBeHide="0"}
+Copysource               = {title="拷贝源" ColPos="2" width="113" Show="1" CanBeHide="0"}
+Copydest                 = {title="拷贝目标" ColPos="3" width="113" Show="1" CanBeHide="0"}
+Status                   = {title="状态" ColPos="4" width="142" Show="1" CanBeHide="0"}
+Clipname                 = {title="素材名称" ColPos="-1" width="200" Show="0" CanBeHide="0"}
+
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+
+
+[Leftview]
+Textcolor                = {0,0,0}
+Textbkcolor              = {125,144,158}
+Bkcolor                  = {124,144,158}
+Textcolorhightlight      = {0,0,0}
+Textbkcolorhightlight    = {148,182,246}
+Bkcolorhightlight        = {148,182,246}
+
+
+[Titlenameview]
+Textcolor        = {0,0,0}
+
+[Clippackview]
+Bkcolor  = {124,144,158}
+
+------------------------------------------本地上载任务-----------------------------------------
+[LocalDub]
+
+//Bkcolor_begin            = {100,113,200}
+Bkcolor_prepared = {120,120,200}
+//Bkcolor_submit           = {79, 69, 112}
+//Bkcolor_active           = {120,120,200}
+//Bkcolor_devchecking      = {135,113,37}
+Bkcolor_recinit  = {238,134,63}
+Bkcolor_recing   = {238,134,63}
+//Bkcolor_ejecting         = {135,113,37}
+//Bkcolor_finish           = {90,105,163}
+Bkcolor_error    = {205, 0, 25}
+
+
+Columns          = {"nDubStatus","strClipName","strSrcDevID","strTapeID","TTapeSOM","strDuration","strChnID","tPlayDate","nClipType","nTCType","nTapeType","nClipStatus","nBitRate","tPlanLastAirTime","strRemark", "nPGMSchStartTime"}
+
+nDubStatus       = {title="状态" ColPos="0" Width="93" Show="1" CanBeHide="0"}
+StrClipName      = {title="素材名称" ColPos="2" Width="142" Show="1" CanBeHide="0"}
+strSrcDevID      = {title="视频源" ColPos="4" Width="103" Show="1" CanBeHide="0"}
+StrTapeID        = {title="磁带号" ColPos="6" Width="110" Show="1" CanBeHide="0"}
+TTapeSOM         = {title="磁带入点" ColPos="3" Width="120" Show="1" CanBeHide="0"}
+StrDuration      = {title="素材长度" ColPos="9" Width="110" Show="1" CanBeHide="0"}
+strChnID         = {title="频道编号" ColPos="5" Width="130" Show="1" CanBeHide="0"}
+tPlayDate        = {title="播出日期" ColPos="-1" Width="135" Show="0" CanBeHide="1"}
+NClipType        = {title="素材类型" ColPos="7" Width="100" Show="1" CanBeHide="0"}
+nTCType          = {title="时码类型" ColPos="8" Width="100" Show="1" CanBeHide="1"}
+nTapeType        = {title="磁带类型" ColPos="10" Width="100" Show="1" CanBeHide="0"}
+nClipStatus      = {title="素材状态" ColPos="1" Width="100" Show="1" CanBeHide="1"}
+NBitRate         = {title="比特率" ColPos="11" Width="57" Show="1" CanBeHide="1"}
+tPlanLastAirTime = {title="最晚播出日期" ColPos="-1" Width="139" Show="0" CanBeHide="1"}
+strRemark        = {title="备注" ColPos="-1" Width="56" Show="0" CanBeHide="1"}
+nPGMSchStartTime = {title="播出时间" ColPos="12" Width="118" Show="1" CanBeHide="0"}
+
+tPlayDate        = {ColPos="7" width="100"}
+
+----------------------------------------新上载素材库列表-----------------------------------------
+[ClipLib]
+
+Columns                  = {"strClipID","strLSOM","strLEOM","strClipName","strSOM","strEOM","strLDuration","strDuration","nChnID","nClipType","strTapeID","strLocation","strPlanAirTime","strPlanLastAirTime","nDelete","nReady","nCheck","strClipLogicID","strDubDateTime","strDubBy","nBitRate","strDubDevID","strTapeSOM"}
+
+strClipID                = {title="素材标识" ColPos="0" Width="99" Show="1" CanBeHide="0"}
+strClipName              = {title="素材名称" ColPos="1" Width="200" Show="1" CanBeHide="0"}
+strLocation              = {title="位置" ColPos="2" Width="64" Show="1" CanBeHide="0"}
+strLSOM                  = {title="逻辑入点" ColPos="3" Width="103" Show="1" CanBeHide="0"}
+strLEOM                  = {title="逻辑出点" ColPos="4" Width="118" Show="1" CanBeHide="0"}
+strLDuration             = {title="逻辑长度" ColPos="5" Width="108" Show="1" CanBeHide="0"}
+strSOM                   = {title="入点" ColPos="6" Width="111" Show="1" CanBeHide="0"}
+strEOM                   = {title="出点" ColPos="7" Width="111" Show="1" CanBeHide="0"}
+strDuration              = {title="长度" ColPos="8" Width="119" Show="1" CanBeHide="0"}
+nChnID                   = {title="频道" ColPos="10" Width="121" Show="1" CanBeHide="0"}
+nClipType                = {title="类型" ColPos="11" Width="77" Show="1" CanBeHide="0"}
+strTapeID                = {title="磁带号" ColPos="12" Width="126" Show="1" CanBeHide="0"}
+strPlanAirTime           = {title="播出日期" ColPos="13" Width="133" Show="1" CanBeHide="1"}
+strPlanLastAirTime       = {title="截止日期" ColPos="14" Width="130" Show="1" CanBeHide="1"}
+nDelete                  = {title="是否删除" ColPos="15" Width="200" Show="0" CanBeHide="1"}
+nReady                   = {title="是否就绪" ColPos="16" Width="200" Show="0" CanBeHide="1"}
+NCheck                   = {title="审查" ColPos="17" Width="200" Show="0" CanBeHide="1"}
+strClipLogicID           = {title="逻辑标识" ColPos="18" Width="200" Show="0" CanBeHide="1"}
+strDubDateTime           = {title="上载时间" ColPos="19" Width="200" Show="0" CanBeHide="1"}
+strDubBy                 = {title="上载人" ColPos="20" Width="200" Show="0" CanBeHide="1"}
+nBitRate                 = {title="比特率" ColPos="21" Width="74" Show="1" CanBeHide="1"}
+strDubDevID              = {title="上载设备" ColPos="22" Width="85" Show="1" CanBeHide="1"}
+strTapeSOM               = {title="磁带入点" ColPos="9" Width="119" Show="1" CanBeHide="0"}
+
+BkColor_Reviewing        = {238,134,63}
+TextColor_UnChecked      = "{100, 100, 24"
+------------------------------------------全局待上载列表-----------------------------------------
+[ClipToDub]
+
+Columns          = {"nIndex","strLogicID","strClipName","strTapeID","tTapeSOM","strDuration","tPlayDate","strChnID","nTCType","nTapeType","nClipType","nClipStatus","nBitRate","tPlanLastAirTime","strRemark", "nPGMSchStartTime"}
+
+nIndex           = {title="序号" ColPos="0" Width="70" Show="1" CanBeHide="0"}
+strLogicID       = {title="逻辑标识" ColPos="15" Width="200" Show="1" CanBeHide="1"}
+StrClipName      = {title="素材名称" ColPos="1" Width="116" Show="1" CanBeHide="0"}
+StrTapeID        = {title="磁带号" ColPos="2" Width="95" Show="1" CanBeHide="0"}
+tTapeSOM         = {title="磁带入点" ColPos="3" Width="104" Show="1" CanBeHide="0"}
+StrDuration      = {title="素材长度" ColPos="4" Width="105" Show="1" CanBeHide="0"}
+tPlayDate        = {title="播出日期" ColPos="5" Width="120" Show="1" CanBeHide="1"}
+strChnID         = {title="频道编号" ColPos="7" Width="111" Show="1" CanBeHide="0"}
+nTCType          = {title="时码类型" ColPos="8" Width="77" Show="1" CanBeHide="1"}
+nTapeType        = {title="磁带类型" ColPos="9" Width="107" Show="1" CanBeHide="0"}
+NClipType        = {title="素材类型" ColPos="10" Width="82" Show="1" CanBeHide="0"}
+nClipStatus      = {title="素材状态" ColPos="11" Width="138" Show="1" CanBeHide="1"}
+NBitRate         = {title="比特率" ColPos="12" Width="200" Show="1" CanBeHide="1"}
+tPlanLastAirTime = {title="最晚播出时间" ColPos="13" Width="200" Show="1" CanBeHide="1"}
+strRemark        = {title="备注" ColPos="14" Width="200" Show="1" CanBeHide="1"}
+nPGMSchStartTime = {title="播出时间" ColPos="6" Width="117" Show="1" CanBeHide="0"}
+
+
+
+------------------------------------------新上载日志列表-----------------------------------------
+[LogLib]
+Columns          = {"tEditTime","strEditBy","strAction","strClipID","strClipName","strTapeID","strChnID","strLSOM","strLEOM","strLDuration","nClipType","tPlanAirTime","tPlanLastAirTime","tDubDateTime","strDubBy"}
+
+tEditTime        = {title="操作时间" ColPos="0" Width="172" Show="1" CanBeHide="0"}
+strEditBy        = {title="操作人" ColPos="1" Width="80" Show="1" CanBeHide="0"}
+strAction        = {title="操作" ColPos="2" Width="72" Show="1" CanBeHide="0"}
+strClipID        = {title="素材编号" ColPos="3" Width="87" Show="1" CanBeHide="0"}
+strClipName      = {title="素材名称" ColPos="4" Width="200" Show="1" CanBeHide="0"}
+strTapeID        = {title="磁带条码" ColPos="5" Width="94" Show="1" CanBeHide="1"}
+strChnID         = {title="频道名称" ColPos="6" Width="122" Show="1" CanBeHide="0"}
+strLSOM          = {title="逻辑入点" ColPos="7" Width="112" Show="1" CanBeHide="1"}
+strLEOM          = {title="逻辑出点" ColPos="8" Width="107" Show="1" CanBeHide="0"}
+strLDuration     = {title="逻辑长度" ColPos="9" Width="100" Show="1" CanBeHide="0"}
+nClipType        = {title="素材类型" ColPos="10" Width="91" Show="1" CanBeHide="1"}
+tPlanAirTime     = {title="计划播出时间" ColPos="11" Width="136" Show="1" CanBeHide="1"}
+tPlanLastAirTime = {title="最后播出时间" ColPos="12" Width="136" Show="1" CanBeHide="1"}
+tDubDateTime     = {title="上载时间" ColPos="14" Width="200" Show="1" CanBeHide="1"}
+strDubBy         = {title="上载人" ColPos="13" Width="58" Show="1" CanBeHide="0"}
+strSOM           = {title="入点" ColPos ="15" Width ="112" Show="1" CanBeHide="1"}
+strEOM           = {title="出点" ColPos ="16" Width ="112" Show="1" CanBeHide="1"}
+strDuration      = {title="长度" ColPos ="17" Width ="112" Show="1" CanBeHide="1"}
+strTapeSOM       = {title="磁带入点" ColPos ="18" Width ="112" Show="1" CanBeHide="1"}
+[ADO]
+class    = ""
+[PGMContact]
+Columns          = {"nIndex","strDescription","strDateTime"}
+nIndex           = {title="序号" ColPos="0" width="55" Show="1" CanBeHide="0"}
+strDescription   = {title="与主播出节目单交互记录" ColPos="1" width="800" Show="1" CanBeHide="0"}
+strDateTime      = {title="时间" ColPos="2" width="300" Show="1" CanBeHide="0"}

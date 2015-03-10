@@ -1,0 +1,344 @@
+
+// =================CH05B=====================
+//
+//              播出设备配置主
+//
+// =============================================
+
+
+
+/// ============================================
+///
+///        播出主备视频服务器解码设备
+///
+///=============================================
+
+
+[DEC05M]
+Class            = "CVideoSrc_VDCP"
+Devicetypeid     = "LVSRC_DEC_OMNEON"
+Devicename       = "HD05M"
+Typename         = "解码口"
+Phydevid         = "CLASSA_24"
+Phydevname       = "江苏动视主播出"
+Com              = "11"
+Decoder          = "55"
+Entry            = "2"
+Diskpreroll      = "60"
+PlayBeforeTime   = "3000"
+LogicCue         = "TRUE"
+
+[DEC05B]
+Class            = "CVideoSrc_VDCP"
+Devicetypeid     = "LVSRC_DEC_OMNEON"
+Devicename       = "HD05B"
+Typename         = "解码口"
+Phydevid         = "CLASSB_24"
+Phydevname       = "江苏动视备播出"
+Com              = "12"
+Decoder          = "55"
+Entry            = "3"
+Diskpreroll      = "60"
+PlayBeforeTime   = "3000"
+
+
+/// ============================================
+///
+///        录像机设备
+///
+///=============================================
+
+[VTR09]
+Class                    = "CVideoSrc_BetaCam"
+Devicename               = "应急录像机09"
+Devicetypeid             = "LVSRC_VTR"
+Com                      = "23"
+Entry                    = "12"
+First_Cue                = "60"
+Second_Cue               = "30"
+Check_Time               = "2"
+TCType                   = "CTL"
+PlayBeforeTime           = "5000"
+PrepareTime              = "720"
+HeadStartTime            = "500"
+VtrOverOpt               = "STOP" // STOP,EJECT,ZERO,ZERO_EJECT
+VtrOverOpt_DelayDur      = "7000"
+Eject_StillDur           = "5000"
+VtrOverOpt_StillDur      = "0"
+Virtual                  = "False"
+Exchange                 = "True"
+
+FixedMode                = "TRUE"
+LastReportTime           = "0"
+CueFlag                  = "FALSE"
+StandByOnTime            = "20000"
+SimpleCue                = "1"
+
+[VTR10]
+Class                    = "CVideoSrc_BetaCam"
+Devicename               = "应急录像机10"
+Devicetypeid             = "LVSRC_VTR"
+Com                      = "24"
+Entry                    = "13"
+First_Cue                = "60"
+Second_Cue               = "30"
+Check_Time               = "2"
+VtrOverOpt               = "STOP" // STOP,EJECT,ZERO,ZERO_EJECT
+TCType                   = "CTL"
+PlayBeforeTime           = "5000"
+PrepareTime              = "720"
+HeadStartTime            = "500"
+VtrOverOpt_DelayDur      = "7000"
+Virtual                  = "False"
+Exchange                 = "True"
+FixedMode                = "TRUE"
+LastReportTime           = "0"
+CueFlag                  = "FALSE"
+StandByOnTime            = "20000"
+VtrOverOpt_StillDur      = "0"
+SimpleCue                = "1"
+Eject_StillDur           = "5000"
+
+/// ============================================
+///
+///        信号切换设备
+///
+///=============================================
+
+
+[MUTIL]
+Class            = "CVideoSwitch_Mutil"
+DeviceName       = "切换开关"
+DeviceTypeID     = "LVSWITCH_MCS"
+Dev              = {"SW1","SW2"}
+SW1_i            = {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16}
+SW1_o            = {1}
+SW2_i            = {3,1,2,5,8,6,9,7,10,11,12,13,14,15,4,16}
+SW2_o            = {1}
+DelayTime        = "720"
+
+Channel          = "32"
+Source           = "32"
+PgmChannel       = "-1"
+PstChannel       = "-1"
+Virtual          = "FALSE"
+Exchange         = "TRUE"
+CheckTime        = "500"
+CheckInterval    = "10"
+
+[SW1]
+Class            = "CVideoSwitch_M2100"
+DeviceTypeID     = "LVSWITCH_MCS"
+DeviceName       = "NVISION切换台"
+
+Com              = "21"
+Source           = "16"
+Channel          = "16"
+Exchange         = "True"
+Virtual          = "False"
+RetCheck         = "1"
+
+PgmChannel       = "-1"
+PstChannel       = "-1"
+DelayTime        = "0"
+Continuous       = "1"
+TakeMode_Direct  = "FALSE"
+SetTransType     = "FALSE"
+SetTransRate     = "FALSE"
+
+[SW2]
+Class            = "CVideoSwitch_LeitchPanacea"
+DeviceTypeID     = "LVSWITCH_MCS"
+DeviceName       = "leitch切换开关"
+
+Com              = "22"
+Exchange         = "True"
+Virtual          = "False"
+Source           = "16"
+Channel          = "16"
+RetCheck         = "1"
+PGM              = "1"
+PST              = "5"
+PgmChannel       = "0"
+PstChannel       = "-1"
+DelayTime        = "0"
+
+/// ============================================
+///
+///        键控设备
+///
+///=============================================
+
+
+[KEY_MULTI]
+class            = "CVideoKey_Multi"
+DeviceName       = "键混器"
+DeviceTypeID     = "LVAUX_KEYER"
+KeyCount         = "2"
+Title            = "1"
+Logo             = "2"
+key1             = {"KEY_NVSION:2","KEY_EVERTZ:1"}              //字幕,Nvison 为2，Evertz 为1
+key2             = {"KEY_NVSION:1","KEY_EVERTZ:8"}              //台标 Nvsion 为1，Evertz 为8
+Virtual          = "FALSE"
+
+Keyer            = "1"
+Time             = "1"
+Exchange         = "FALSE"
+[KEY_NVSION]
+class            = "CVideoAux_M2100"
+Devicetypeid     = "LVAUX_KEYER"
+Devicename       = "NVISION"
+RetCheck         = "1"
+Com              = "21"
+Virtual          = "FALSE"
+Exchange         = "True"
+Logo             = "1"
+Title            = "2"
+
+Keyer            = "1"
+Time             = "1"
+PutOffTime       = "0"
+Continuous       = "1"
+
+[KEY_EVERTZ]
+class            = "CVideoAux_M2100"
+Devicetypeid     = "LVAUX_KEYER"
+Devicename       = "evertz"
+RetCheck         = "1"
+Com              = "26"
+Virtual          = "FALSE"
+Exchange         = "True"
+Evertz           = "TRUE"
+ForceLogo        = "TRUE"
+DelayLogoOp      = "30"
+LogoNum          = "1"
+Logo             = "8"
+Title            = "1"
+PutOffTime       = "-500"
+Keyer            = "1"
+Time             = "1"
+Continuous       = "1"
+/// ============================================
+///
+///        播出视频服务器设备(主要用于素材检查)
+///
+///=============================================
+
+[BVSMAIN]
+Class            = "CVideoStore_FtpAgent"
+Devicename       = "主播出服务器"
+Devicetypeid     = "LVSTORE_BVS_FTP"
+FTPAgent         = "bc-bvs-sdb02"
+FTPSite          = "BVS2M"
+TransRate        = "8000000"
+Nlocation        = "1" // 索引从0开始
+
+StoreGroupID     = "1"
+nStore           = "0"
+MaxAmount        = "-1"
+AlertPercent     = "-1"
+BitRate          = "8000000"
+Load_Interval    = "30"
+
+[BVSSLAVE]
+Class            = "CVideoStore_FtpAgent"
+Devicename       = "备播出服务器"
+Devicetypeid     = "LVSTORE_BVS_FTP"
+FTPAgent         = "bc-bvs-sdb02"
+FtpSite          = "BVS2B"
+TransRate        = "8000000"
+Nlocation        = "6" // 索引从0开始
+StoreGroupID     = "1"
+nStore           = "0"
+MaxAmount        = "-1"
+AlertPercent     = "-1"
+
+/// ============================================
+///
+///        主备视频源之外的线形视频源
+///
+///=============================================
+
+[LINE1]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "线路信号1"
+Entry            = "1"
+
+[LINE2]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "线路信号2"
+Entry            = "15"
+
+[LINE3]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "线路信号3"
+Entry            = "4"
+
+[BMTX.020]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "BMTX.020"
+Entry            = "5"
+
+[BMTX.021]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "BMTX.021"
+Entry            = "6"
+
+[BMTX.022]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "BMTX.022"
+Entry            = "7"
+
+[BMTX.023]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "BMTX.023"
+Entry            = "8"
+
+[BMTX.024]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "BMTX.024"
+Entry            = "9"
+
+[CCTV.FC1]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "CCTV.FC1"
+Entry            = "10"
+
+[CCTV.FC2]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "CCTV.FC2"
+Entry            = "11"
+
+[TEST.002]
+Class            = "CVideoSrc_Line"
+Devicetypeid     = "LVSRC_LINE"
+Devicename       = "TEST.002"
+Entry            = "14"
+
+/// ============================================
+///
+///       485主备倒换器
+///
+///=============================================
+
+[485Exchange]
+Class            = "CVideoDevEchg_485"
+Devicetypeid     = "LVAUX_ECHG"
+Devicename       = "422倒换开关"
+Exchange         = "True"
+DEV              = {"485_1"}
+Delay            = "10"
+Enable           = "True"
+Master           = "2"
+Slave            = "1"
+485_1            = <com="44">
