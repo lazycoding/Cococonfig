@@ -33,9 +33,6 @@
     <ClInclude Include="ResourceNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResourceParser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="ResourceWriter.h">
       <Filter>Header Files</Filter>
     </ClInclude>

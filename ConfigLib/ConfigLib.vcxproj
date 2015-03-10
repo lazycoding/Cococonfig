@@ -78,7 +78,6 @@
     <ClInclude Include="Parser.h" />
     <ClInclude Include="ResourceGenerator.h" />
     <ClInclude Include="ResourceNode.h" />
-    <ClInclude Include="ResourceParser.h" />
     <ClInclude Include="ResourceTree.h" />
     <ClInclude Include="ResourceValue.h" />
     <ClInclude Include="ResourceWriter.h" />
