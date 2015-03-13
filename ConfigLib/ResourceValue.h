@@ -41,8 +41,6 @@ public:
 	void SetStringArray(const std::vector<std::string>& array);
 
 	Type GetType() const;
-
-	std::string ToString() const;
 	
 private:
 	void FreeMemory();

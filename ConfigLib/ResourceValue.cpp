@@ -4,24 +4,6 @@
 #include <Windows.h>
 using namespace std;
 
-std::string format(const char *fmt, ...)
-{
-	std::string strResult = "";
-	if (NULL != fmt)
-	{
-		va_list marker = NULL;
-		va_start(marker, fmt);                            //初始化变量参数 
-		size_t nLength = _vscprintf(fmt, marker) + 1;    //获取格式化字符串长度
-		std::vector<char> vBuffer(nLength, '\0');        //创建用于存储格式化字符串的字符数组
-		int nWritten = _vsnprintf_s(&vBuffer[0], vBuffer.size(), nLength, fmt, marker);
-		if (nWritten>0)
-		{
-			strResult = &vBuffer[0];
-		}
-		va_end(marker);                                    //重置变量参数
-	}
-	return strResult;
-}
 
 ResourceValue::~ResourceValue()
 {
@@ -246,59 +228,4 @@ ResourceValue& ResourceValue::operator=(const ResourceValue& rvalue)
 	}
 
 	return *this;
-}
-
-string ResourceValue::ToString() const
-{
-	if (type_ == String)
-	{
-		return *value_.stringVal;
-	}
-
-	if (type_ == Array)
-	{
-		string ret = "{";
-		for (auto it = begin(*value_.arrayVal); it != end(*value_.arrayVal); it++)
-		{
-			ret += "\"";
-			ret += *it;
-			ret += "\",";			
-		}
-		
-		ret.replace(ret.rbegin().base(), ret.end(), "}");
-		return ret;
-	}
-
-	if (type_ == Boolean)
-	{		
-		return value_.boolVal ? "TRUE" : "FALSE";
-	}
-
-	if (type_ == Integer)
-	{
-		stringstream s;
-		s << value_.intVal;
-		return s.str();
-	}
-
-	if (type_ == Float)
-	{
-		stringstream s;
-		s << value_.floatVal;
-		return s.str();
-	}
-
-	if (type_ == Color)
-	{
-
-		int r = GetRValue(value_.colorVal);
-		int g = GetGValue(value_.colorVal);
-		int b = GetBValue(value_.colorVal);
-
-		string ret = format("{%d,%d,%d}", r, g, b);
-
-		return ret;
-	}
-
-	return "unknown";
 }

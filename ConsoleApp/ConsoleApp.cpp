@@ -13,9 +13,10 @@ using namespace std;
 #include "..\ConfigLib\ResourceGenerator.h"
 #include "..\ConfigLib\ResourceTree.h"
 #include "..\ConfigLib\TraversalTree.h"
+#include "..\ConfigLib\StringUtils.h"
 int _tmain(int argc, _TCHAR* argv[])
 {
-	{
+	{		
 		ifstream f("..\\File\\chbroadcast.clsid");
 		f.seekg(0, ios::end);
 		size_t size = (size_t)f.tellg();
@@ -30,16 +31,14 @@ int _tmain(int argc, _TCHAR* argv[])
 
 		int level = 0;
 		TraversalTree::Preorder(tree->Root(), [&](ResourceNode* node){
-			if (!node->IsValueNode())
+			if (node->IsValueNode())
+			{
+				cout << node->Name() << "=" << stringutils::tostring(node->Value()) << endl;
+			}
+			else if (node->LineNumber() != -1)
 			{
 				cout << "[" << node->Name() << "]" << endl;
-			}
-			else
-			{
-				cout << node->Name() << "=" << node->Value().ToString();
-			}
-
-			
+			}					
 		});
 	}
 	_CrtDumpMemoryLeaks();
