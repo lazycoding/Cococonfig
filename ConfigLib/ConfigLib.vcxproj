@@ -85,6 +85,7 @@
     <ClInclude Include="StringUtils.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TraversalTree.h" />
+    <ClInclude Include="XmlProperty.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClsidParser.cpp" />
@@ -98,6 +99,7 @@
     </ClCompile>
     <ClCompile Include="StringUtils.cpp" />
     <ClCompile Include="TraversalTree.cpp" />
+    <ClCompile Include="XmlProperty.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -17,34 +17,7 @@ ResourceValue::ResourceValue()
 
 ResourceValue::ResourceValue(const ResourceValue& rvalue)
 {
-	type_ = rvalue.type_;
-
-	if (rvalue.type_ == String)
-	{
-		value_.stringVal = new std::string(*rvalue.value_.stringVal);
-	}
-	else if (rvalue.type_ == Array)
-	{
-		value_.arrayVal = new std::vector<std::string>();
-		value_.arrayVal->resize(rvalue.value_.arrayVal->size());
-		value_.arrayVal->assign(rvalue.value_.arrayVal->begin(), rvalue.value_.arrayVal->end());
-	}
-	else if (rvalue.type_ == Integer)
-	{
-		value_.intVal = rvalue.value_.intVal;
-	}
-	else if (rvalue.type_ == Boolean)
-	{
-		value_.boolVal = rvalue.value_.boolVal;
-	}
-	else if (rvalue.type_ == Color)
-	{
-		value_.colorVal = rvalue.value_.colorVal;
-	}
-	else if (rvalue.type_ == Float)
-	{
-		value_.floatVal = rvalue.value_.floatVal;
-	}
+	Assign(rvalue);
 }
 
 int ResourceValue::GetInt() const
@@ -176,6 +149,12 @@ void ResourceValue::FreeMemory()
 		delete value_.arrayVal;
 		value_.arrayVal = nullptr;
 	}
+
+	if (type_ == Prop)
+	{
+		delete value_.propVal;
+		value_.propVal = nullptr;
+	}
 	type_ = Empty;
 }
 
@@ -186,18 +165,24 @@ ResourceValue& ResourceValue::operator=(const ResourceValue& rvalue)
 		return *this;
 	}
 
-	if (type_ == String)
-	{
-		delete value_.stringVal;
-		value_.stringVal = nullptr;
-	}
+	FreeMemory();
 
-	if (type_ == Array)
-	{
-		delete value_.arrayVal;
-		value_.arrayVal = nullptr;
-	}
+	Assign(rvalue);
 
+	return *this;
+}
+
+void ResourceValue::SetProperty(const XmlProperty& prop)
+{
+	FreeMemory();
+
+	type_ = Prop;
+
+	value_.propVal = new XmlProperty(prop);
+}
+
+void ResourceValue::Assign(const ResourceValue& rvalue)
+{
 	type_ = rvalue.type_;
 
 	if (rvalue.type_ == String)
@@ -209,6 +194,10 @@ ResourceValue& ResourceValue::operator=(const ResourceValue& rvalue)
 		value_.arrayVal = new std::vector<std::string>();
 		value_.arrayVal->resize(rvalue.value_.arrayVal->size());
 		value_.arrayVal->assign(rvalue.value_.arrayVal->begin(), rvalue.value_.arrayVal->end());
+	}
+	else if (rvalue.type_ == Prop)
+	{
+		value_.propVal = new XmlProperty(*rvalue.value_.propVal);
 	}
 	else if (rvalue.type_ == Integer)
 	{
@@ -226,6 +215,13 @@ ResourceValue& ResourceValue::operator=(const ResourceValue& rvalue)
 	{
 		value_.floatVal = rvalue.value_.floatVal;
 	}
+}
 
-	return *this;
+XmlProperty ResourceValue::GetProperty() const
+{
+	if (type_ == Prop)
+	{
+		return *value_.propVal;
+	}
+	throw std::runtime_error("Type isn't XmlProperty");
 }

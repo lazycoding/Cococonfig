@@ -16,18 +16,12 @@ using namespace std;
 #include "..\ConfigLib\StringUtils.h"
 int _tmain(int argc, _TCHAR* argv[])
 {
-	{		
-		ifstream f("..\\File\\chbroadcast.clsid");
-		f.seekg(0, ios::end);
-		size_t size = (size_t)f.tellg();
-		string bytes;
-		bytes.resize(size + 1);
-		f.seekg(0, ios::beg);
-		f.read(&bytes.front(), size);
-		f.close();
-		bytes[bytes.size()] = 0;
-		ResourceGenerator g(make_shared<ClsidParser>());
-		auto tree = g.GenerateResourceTree(bytes, ResourceType::Main);
+	{				
+		ResourceGenerator g(make_shared<ClsidParser>());	
+
+		g.Path("..\\File\\chbroadcast.clsid");
+
+		auto tree = g.GenerateResourceTree();
 
 		int level = 0;
 		TraversalTree::Preorder(tree->Root(), [&](ResourceNode* node){

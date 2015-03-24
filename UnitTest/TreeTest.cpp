@@ -41,6 +41,10 @@ namespace unittest
 				ResourceNode node4("User", rv, 2);
 				Assert::AreEqual(true, node4.IsValueNode());
 				tree.Insert(env, node4);
+
+				auto en = tree.Find("/etc/iip/Environment");
+				Assert::IsNotNull(en);
+				Assert::AreEqual("Environment", en->Name().c_str());
 			}
 		}
 

@@ -38,6 +38,7 @@ public:
 	void LineNumber(LineNo line_no);
 
 	LineNo LineNumber() const;
+
 private:
 	std::string name_;
 	LineNo line_;

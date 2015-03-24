@@ -24,9 +24,10 @@ public:
 	//
 	ResourceNode* Root() const;
 
+	ResourceNode* Find(const char* path);
+
 private:
 	ResourceNode* root_;
 	void DestroyTree(ResourceNode* treenode);
-
 };
 

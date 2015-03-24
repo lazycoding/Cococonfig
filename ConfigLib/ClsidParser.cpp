@@ -2,54 +2,10 @@
 #include "ClsidParser.h"
 #include <string>
 #include <vector>
-#include <functional>
-#include <algorithm>
-#include <cctype>
 #include <windows.h>
-using std::string;
-using std::transform;
-using std::vector;
+#include "StringUtils.h"
+using namespace std;
 
-
-// trim from start
-static inline std::string &ltrim(std::string &s) {
-	s.erase(s.begin(), std::find_if(s.begin(), s.end(), std::not1(std::ptr_fun<int, int>(std::isspace))));
-	return s;
-}
-
-// trim from end
-static inline std::string &rtrim(std::string &s) {
-	s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun<int, int>(std::isspace))).base(), s.end());
-	return s;
-}
-
-// trim from both ends
-static inline std::string &trim(std::string &s) {
-	return ltrim(rtrim(s));
-}
-
-int SplitString(const std::string& orign, std::vector<std::string>& splited_strings, const std::string& spliter)
-{
-	string::size_type off = 0;
-	string::size_type find_position = orign.find(spliter, off);
-	string stemp;
-	while (find_position != string::npos)
-	{
-		stemp = orign.substr(off, find_position - off);
-		trim(stemp);
-		splited_strings.push_back(stemp);
-		off = find_position;
-		off += spliter.length();
-		find_position = orign.find(spliter, off);
-	}
-	if (off < orign.length())
-	{
-		stemp = orign.substr(off, orign.length() - off);
-		trim(stemp);
-		splited_strings.push_back(stemp);
-	}
-	return splited_strings.size();
-}
 
 ClsidParser::ClsidParser()
 {
@@ -68,6 +24,11 @@ bool ClsidParser::Parse(const std::string& raw_value, ResourceNode& node)
 	}
 
 	if (raw_value[0] == '/' && raw_value[1] == '/')
+	{
+		return false;
+	}
+
+	if (raw_value[0] == '-' && raw_value[1] == '-')
 	{
 		return false;
 	}
@@ -134,7 +95,7 @@ bool ClsidParser::Parse(const std::string& raw_value, ResourceNode& node)
 					value.clear();
 					value.assign(data + begin, data + end);
 					vector<string> array;
-					int splited = SplitString(value, array, ",");
+					int splited = stringutils::SplitString(value, array, ",");
 					vector<int> color;
 					vector<string> strarray;
 					if (splited > 0)
@@ -205,24 +166,50 @@ bool ClsidParser::Parse(const std::string& raw_value, ResourceNode& node)
 					value.clear();
 					end = raw_value.size() - (c - data);
 					value.assign(c, c + end);
-					auto find = value.rfind('"');
-					if (find != string::npos)
-					{
-						value.erase(find, value.size() - find);
-					}
 					ResourceValue v;
-					if (_stricmp(value.c_str(), "true") == 0)
+					stringutils::trim(value, [](int c_)->int{ return c_ == '"'; });
+					int find = value.rfind('>');
+					if (find != string::npos && value[0] == '<')
 					{
-						v.SetBoolean(true);
-					}
-					else if (_stricmp(value.c_str(), "false") == 0)
-					{
-						v.SetBoolean(false);
+						string str;
+						str.assign(value.begin() + 1, value.begin() + find);
+						vector<string> vs;
+						stringutils::SplitString(str, vs, ",");
+						XmlProperty prop;
+						for each(auto i in vs)
+						{
+							string key;
+							int sep = i.find('=');
+							key = i.substr(0, sep);
+							string val;
+							val = i.substr(sep + 1);
+							stringutils::trim(key);							
+							stringutils::trim(val, [](int c_)->int{ return c_ == '"'; });
+							prop[key] = val;
+						}
+						v.SetProperty(prop);						
 					}
 					else
-					{
-						v.SetString(value);
+					{			
+						find = value.rfind('"');
+						if (find != string::npos)
+						{
+							value = value.substr(0, find);
+						}
+						if (_stricmp(value.c_str(), "true") == 0)
+						{
+							v.SetBoolean(true);
+						}
+						else if (_stricmp(value.c_str(), "false") == 0)
+						{
+							v.SetBoolean(false);
+						}
+						else
+						{
+							v.SetString(value);
+						}
 					}
+					
 					node.Name(key);
 					node.Value(v);
 					return true;

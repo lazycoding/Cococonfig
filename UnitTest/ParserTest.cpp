@@ -21,6 +21,13 @@ namespace unittest
 			Assert::IsFalse(pa.Parse("", node));
 			Assert::IsFalse(pa.Parse("\0\0\0\0", node));
 
+			pa.Parse("When     = <TYPE=\"Frequency\" Frequency=\"00:05 : 00 : 00\">           // 循环方式 和老的素材管理自动任务配置是一样的，也可以改成定时方式", node);
+
+			pa.Parse("CanAutoChangeStation             = \"FALSE\"                      //", node);
+
+			pa.Parse("Config.device    = <path=\"/etc/dev\", file=\"CH_DbasDev.CLSID\">", node);
+			Assert::AreEqual((int)ResourceValue::Prop, (int)node.Value().GetType());
+
 			pa.Parse("[Environment]", node);
 			Assert::AreEqual("Environment", node.Name().c_str());
 

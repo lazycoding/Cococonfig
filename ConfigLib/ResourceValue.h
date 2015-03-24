@@ -1,12 +1,13 @@
 #pragma once
 #include <string>
 #include <vector>
-
+#include <unordered_map>
+#include "XmlProperty.h"
 
 class ResourceValue
 {
 public:
-	enum Type{ Empty, Boolean, Integer, Float, String, Array, Color, Url, Custom };
+	enum Type{ Empty, Boolean, Integer, Float, String, Array, Color, Url, Prop, Custom };
 
 	ResourceValue();
 
@@ -40,11 +41,15 @@ public:
 	
 	void SetStringArray(const std::vector<std::string>& array);
 
+	void SetProperty(const XmlProperty& prop);
+
+	XmlProperty GetProperty() const;
+
 	Type GetType() const;
 	
 private:
 	void FreeMemory();
-
+	void Assign(const ResourceValue& rvalue);
 	union ValueUnion
 	{
 		bool boolVal;
@@ -53,6 +58,7 @@ private:
 		double floatVal;		
 		std::string* stringVal;
 		std::vector<std::string>* arrayVal;
+		XmlProperty*	propVal;
 	}value_;
 
 	Type type_;

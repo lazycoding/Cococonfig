@@ -6,6 +6,7 @@
 #include <sstream>
 using namespace std;
 #include "..\ConfigLib\ResourceValue.h"
+#include "..\ConfigLib\XmlProperty.h"
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 
 namespace unittest
@@ -68,6 +69,14 @@ namespace unittest
 			v.SetColor(clr);
 			auto clr2 = v.GetColor();
 			Assert::AreEqual(clr, clr2);
+		}
+
+		TEST_METHOD(TestXmlProp)
+		{
+			ResourceValue v;
+			XmlProperty prop;
+			v.SetProperty(prop);
+			auto prop2 = v.GetProperty();
 		}
 		
 	};
